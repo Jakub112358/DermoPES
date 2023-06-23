@@ -18,11 +18,11 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    @OneToMany (mappedBy = "question", cascade = CascadeType.ALL)
-    private List<Answer> answers;
     private LocalDate examDate;
     @ElementCollection(targetClass = Category.class)
     @CollectionTable
     @Enumerated(EnumType.STRING)
-    private List<Category> category;
+    private List<Category> categories;
+    @OneToMany (mappedBy = "question", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Answer> answers;
 }
