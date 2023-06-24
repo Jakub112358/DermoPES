@@ -1,4 +1,4 @@
-package com.dermopes.service;
+package com.dermopes.service.util;
 
 import com.dermopes.dto.answer.AnswerResponseDto;
 import com.dermopes.dto.question.QuestionCreateDto;

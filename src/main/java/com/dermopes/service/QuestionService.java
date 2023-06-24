@@ -1,12 +1,16 @@
 package com.dermopes.service;
 
 import com.dermopes.dto.question.QuestionCreateDto;
+import com.dermopes.dto.question.QuestionCriteriaDto;
 import com.dermopes.dto.question.QuestionResponseDto;
 import com.dermopes.dto.question.QuestionUpdateDto;
 import com.dermopes.exception.ResourceNotFoundException;
 import com.dermopes.model.Question;
 import com.dermopes.repository.QuestionRepository;
+import com.dermopes.service.util.QuestionMapper;
+import com.dermopes.service.util.QuestionSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,11 +49,19 @@ public class QuestionService {
         questionRepository.deleteById(id);
     }
 
+    public List<QuestionResponseDto> findByCriteria(QuestionCriteriaDto criteria) {
+        Specification<Question> specification = new QuestionSpecification(criteria);
+        return questionRepository.findAll(specification).stream()
+                .map(questionMapper::toResponseDto)
+                .toList();
+    }
+
     private void updateQuestion(Question question, QuestionUpdateDto updateDto) {
         question.setContent(updateDto.getContent());
         question.setExamDate(updateDto.getExamDate());
         question.setCategories(updateDto.getCategories());
         question.setDifficulty(updateDto.getDifficulty());
     }
+
 
 }

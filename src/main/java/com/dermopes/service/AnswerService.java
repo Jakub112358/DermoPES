@@ -6,6 +6,7 @@ import com.dermopes.exception.NotMatchingAnswerException;
 import com.dermopes.exception.ResourceNotFoundException;
 import com.dermopes.model.Answer;
 import com.dermopes.repository.AnswerRepository;
+import com.dermopes.service.util.AnswerMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
