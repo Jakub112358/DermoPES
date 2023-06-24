@@ -25,6 +25,7 @@ public class QuestionMapper {
 
         question.setContent(request.getContent());
         question.setExamDate(request.getExamDate());
+        question.setDifficulty(request.getDifficulty());
         question.setCategories(request.getCategories());
         question.setAnswers(answers);
 
@@ -41,6 +42,7 @@ public class QuestionMapper {
                 .id(entity.getId())
                 .content(entity.getContent())
                 .examDate(entity.getExamDate())
+                .difficulty(entity.getDifficulty())
                 .categories(entity.getCategories())
                 .answers(answers)
                 .build();

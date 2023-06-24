@@ -1,6 +1,7 @@
 package com.dermopes.model;
 
 import com.dermopes.model.enumeration.Category;
+import com.dermopes.model.enumeration.Difficulty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,12 +20,16 @@ public class Question {
     private Long id;
     private String content;
     private LocalDate examDate;
+
     @ElementCollection(targetClass = Category.class)
     @CollectionTable
     @Enumerated(EnumType.STRING)
     private List<Category> categories;
     @OneToMany (mappedBy = "question", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Answer> answers;
+
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
 
     @Override
     public boolean equals(Object o) {
