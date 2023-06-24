@@ -1,6 +1,7 @@
 package com.dermopes.service;
 
 import com.dermopes.dto.QuestionCreateDto;
+import com.dermopes.dto.QuestionResponseDto;
 import com.dermopes.model.Question;
 import com.dermopes.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,10 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
     private final QuestionMapper questionMapper;
 
-    public Question save(QuestionCreateDto createDto){
+    public QuestionResponseDto save(QuestionCreateDto createDto){
         Question entity = questionMapper.toEntity(createDto);
         questionRepository.save(entity);
-        return entity;
+        return questionMapper.toResponseDto(entity);
     }
 
 }

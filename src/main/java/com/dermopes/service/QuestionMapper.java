@@ -1,6 +1,8 @@
 package com.dermopes.service;
 
+import com.dermopes.dto.AnswerResponseDto;
 import com.dermopes.dto.QuestionCreateDto;
+import com.dermopes.dto.QuestionResponseDto;
 import com.dermopes.model.Answer;
 import com.dermopes.model.Question;
 import lombok.RequiredArgsConstructor;
@@ -14,14 +16,32 @@ public class QuestionMapper {
     private final AnswerMapper answerMapper;
 
     public Question toEntity(QuestionCreateDto request) {
-        List<Answer> answers = request.getAnswers()
-                .stream()
+
+        Question question = new Question();
+        List<Answer> answers = request.getAnswers().stream()
                 .map(answerMapper::toEntity)
+                .peek(a -> a.setQuestion(question))
                 .toList();
-        return Question.builder()
-                .content(request.getContent())
-                .examDate(request.getExamDate())
-                .categories(request.getCategories())
+
+        question.setContent(request.getContent());
+        question.setExamDate(request.getExamDate());
+        question.setCategories(request.getCategories());
+        question.setAnswers(answers);
+
+        return question;
+
+    }
+
+    public QuestionResponseDto toResponseDto(Question entity) {
+        List<AnswerResponseDto> answers = entity.getAnswers().stream()
+                .map(answerMapper::toResponseDto)
+                .toList();
+
+        return QuestionResponseDto.builder()
+                .id(entity.getId())
+                .content(entity.getContent())
+                .examDate(entity.getExamDate())
+                .categories(entity.getCategories())
                 .answers(answers)
                 .build();
     }

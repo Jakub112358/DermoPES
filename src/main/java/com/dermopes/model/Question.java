@@ -25,4 +25,21 @@ public class Question {
     private List<Category> categories;
     @OneToMany (mappedBy = "question", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Answer> answers;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+
+        if (!(o instanceof Question other))
+            return false;
+
+        return id != null &&
+                id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

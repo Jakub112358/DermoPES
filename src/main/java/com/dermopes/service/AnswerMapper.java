@@ -1,6 +1,7 @@
 package com.dermopes.service;
 
 import com.dermopes.dto.AnswerCreateDto;
+import com.dermopes.dto.AnswerResponseDto;
 import com.dermopes.model.Answer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,14 @@ public class AnswerMapper {
         return Answer.builder()
                 .content(createDto.getContent())
                 .correct(createDto.isCorrect())
+                .build();
+    }
+
+    public AnswerResponseDto toResponseDto(Answer answer) {
+        return AnswerResponseDto.builder()
+                .id(answer.getId())
+                .content(answer.getContent())
+                .correct(answer.isCorrect())
                 .build();
     }
 }
