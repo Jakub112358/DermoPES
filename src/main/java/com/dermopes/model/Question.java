@@ -21,7 +21,7 @@ public class Question {
     private String content;
     private LocalDate examDate;
 
-    @ElementCollection(targetClass = Category.class)
+    @ElementCollection(targetClass = Category.class, fetch = FetchType.EAGER)
     @CollectionTable
     @Enumerated(EnumType.STRING)
     private List<Category> categories;

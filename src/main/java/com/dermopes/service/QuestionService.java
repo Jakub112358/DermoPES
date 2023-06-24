@@ -28,11 +28,11 @@ public class QuestionService {
     }
 
     public QuestionResponseDto findById(Long id) {
-        return questionMapper.toResponseDto(questionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Question", id)));
+        return questionMapper.toResponseDto(questionRepository.findByIdWithAnswers(id).orElseThrow(() -> new ResourceNotFoundException("Question", id)));
     }
 
     public List<QuestionResponseDto> findAll() {
-        return questionRepository.findAll().stream()
+        return questionRepository.findAllWithAnswers().stream()
                 .map(questionMapper::toResponseDto)
                 .toList();
     }
