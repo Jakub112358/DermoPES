@@ -42,13 +42,7 @@ public class QuestionService {
     }
 
     public void deleteById(Long id) {
-        throwIfDoesNotExist(id);
         questionRepository.deleteById(id);
-    }
-
-    private void throwIfDoesNotExist(Long id) {
-        if (!questionRepository.existsById(id))
-            throw new ResourceNotFoundException("Question", id);
     }
 
     private void updateQuestion(Question question, QuestionUpdateDto updateDto) {

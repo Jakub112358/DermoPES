@@ -4,8 +4,10 @@ import com.dermopes.dto.question.QuestionCreateDto;
 import com.dermopes.dto.question.QuestionResponseDto;
 import com.dermopes.dto.question.QuestionUpdateDto;
 import com.dermopes.service.QuestionService;
+import com.dermopes.validation.existingQuestionId.ExistingQuestionId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -19,6 +21,7 @@ import static com.dermopes.config.ApiConstraints.QUESTION;
 @RequestMapping(QUESTION)
 @CrossOrigin(origins = ORIGIN)
 @RequiredArgsConstructor
+@Validated
 public class QuestionController {
     private final QuestionService questionService;
 
@@ -35,17 +38,17 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QuestionResponseDto> findById(@PathVariable Long id) {
+    public ResponseEntity<QuestionResponseDto> findById(@PathVariable @ExistingQuestionId Long id) {
         return ResponseEntity.ok(questionService.findById(id));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<QuestionResponseDto> update(@PathVariable Long id, @RequestBody QuestionUpdateDto updateDto) {
+    public ResponseEntity<QuestionResponseDto> update(@PathVariable @ExistingQuestionId Long id, @RequestBody QuestionUpdateDto updateDto) {
         return ResponseEntity.ok(questionService.update(id, updateDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable @ExistingQuestionId Long id) {
         questionService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
