@@ -1,7 +1,7 @@
 package com.dermopes.controller;
 
-import com.dermopes.dto.QuestionCreateDto;
-import com.dermopes.dto.QuestionResponseDto;
+import com.dermopes.dto.question.QuestionCreateDto;
+import com.dermopes.dto.question.QuestionResponseDto;
 import com.dermopes.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

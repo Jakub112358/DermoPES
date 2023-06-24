@@ -1,8 +1,8 @@
 package com.dermopes.service;
 
-import com.dermopes.dto.AnswerResponseDto;
-import com.dermopes.dto.QuestionCreateDto;
-import com.dermopes.dto.QuestionResponseDto;
+import com.dermopes.dto.answer.AnswerResponseDto;
+import com.dermopes.dto.question.QuestionCreateDto;
+import com.dermopes.dto.question.QuestionResponseDto;
 import com.dermopes.model.Answer;
 import com.dermopes.model.Question;
 import lombok.RequiredArgsConstructor;

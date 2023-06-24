@@ -1,7 +1,7 @@
 package com.dermopes.service;
 
-import com.dermopes.dto.AnswerCreateDto;
-import com.dermopes.dto.AnswerResponseDto;
+import com.dermopes.dto.answer.AnswerCreateDto;
+import com.dermopes.dto.answer.AnswerResponseDto;
 import com.dermopes.model.Answer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

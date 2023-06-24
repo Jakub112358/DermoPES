@@ -1,4 +1,4 @@
-package com.dermopes.dto;
+package com.dermopes.dto.question;
 
 import com.dermopes.model.enumeration.Category;
 import lombok.*;
@@ -11,9 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class QuestionCreateDto {
+public class QuestionUpdateDto {
     private String content;
     private LocalDate examDate;
-    private List<AnswerCreateDto> answers;
     private List<Category> categories;
 }

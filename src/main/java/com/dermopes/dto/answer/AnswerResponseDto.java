@@ -1,4 +1,4 @@
-package com.dermopes.dto;
+package com.dermopes.dto.answer;
 
 import lombok.*;
 
@@ -7,7 +7,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AnswerCreateDto {
+public class AnswerResponseDto {
+    private Long id;
     private String content;
     private boolean correct;
 }
