@@ -41,8 +41,30 @@ public class AnswerService {
         return answerMapper.toResponseDto(answerRepository.findById(answerId).orElseThrow(() -> new ResourceNotFoundException("Answer", answerId)));
     }
 
+    public AnswerResponseDto update(Long questionId, Long answerId, AnswerCreateDto createDto) {
+        throwIfQuestionDoesNotExist(questionId);
+
+        throwIfAnswerDoesNotExist(answerId);
+        answerRepository.deleteById(answerId);
+
+        Answer newAnswer = answerMapper.toEntity(createDto, questionId);
+        answerRepository.save(newAnswer);
+        return answerMapper.toResponseDto(newAnswer);
+    }
+
+    public void deleteById(Long questionId, Long answerId) {
+        throwIfQuestionDoesNotExist(questionId);
+        throwIfAnswerDoesNotExist(answerId);
+        answerRepository.deleteById(answerId);
+    }
+
     private void throwIfQuestionDoesNotExist(Long id) {
         if (!questionRepository.existsById(id))
             throw new ResourceNotFoundException("Question", id);
+    }
+
+    private void throwIfAnswerDoesNotExist(Long id) {
+        if (!answerRepository.existsById(id))
+            throw new ResourceNotFoundException("Answer", id);
     }
 }

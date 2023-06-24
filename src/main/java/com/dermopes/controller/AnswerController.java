@@ -38,6 +38,17 @@ public class AnswerController {
         return ResponseEntity.ok(answerService.findById(questionId, answerId));
     }
 
+    @PutMapping("/{questionId}/answers/{answerId}")
+    public ResponseEntity<AnswerResponseDto> update(@PathVariable Long questionId, @PathVariable Long answerId, @RequestBody AnswerCreateDto createDto) {
+        return ResponseEntity.ok(answerService.update(questionId, answerId, createDto));
+    }
+
+    @DeleteMapping("/{questionId}/answers/{answerId}")
+    public ResponseEntity<Void> delete(@PathVariable Long questionId, @PathVariable Long answerId) {
+        answerService.deleteById(questionId, answerId);
+        return ResponseEntity.noContent().build();
+    }
+
     private URI getNewResourceLocation(long id) {
         return ServletUriComponentsBuilder
                 .fromCurrentRequest()
