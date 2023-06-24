@@ -8,6 +8,7 @@ import com.dermopes.model.Question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -18,11 +19,15 @@ public class QuestionMapper {
     public Question toEntity(QuestionCreateDto request) {
 
         Question question = new Question();
-        List<Answer> answers = request.getAnswers().stream()
-                .map(answerMapper::toEntity)
-                .peek(a -> a.setQuestion(question))
-                .toList();
-
+        List<Answer> answers;
+        if (request.getAnswers() != null) {
+            answers = request.getAnswers().stream()
+                    .map(answerMapper::toEntity)
+                    .peek(a -> a.setQuestion(question))
+                    .toList();
+        } else {
+            answers = new ArrayList<>();
+        }
         question.setContent(request.getContent());
         question.setExamDate(request.getExamDate());
         question.setDifficulty(request.getDifficulty());
@@ -30,7 +35,6 @@ public class QuestionMapper {
         question.setAnswers(answers);
 
         return question;
-
     }
 
     public QuestionResponseDto toResponseDto(Question entity) {

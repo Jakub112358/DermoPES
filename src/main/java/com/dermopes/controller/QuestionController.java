@@ -5,6 +5,7 @@ import com.dermopes.dto.question.QuestionResponseDto;
 import com.dermopes.dto.question.QuestionUpdateDto;
 import com.dermopes.service.QuestionService;
 import com.dermopes.validation.existingQuestionId.ExistingQuestionId;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -26,7 +27,7 @@ public class QuestionController {
     private final QuestionService questionService;
 
     @PostMapping
-    public ResponseEntity<QuestionResponseDto> save(@RequestBody QuestionCreateDto createDto) {
+    public ResponseEntity<QuestionResponseDto> save(@RequestBody @Valid QuestionCreateDto createDto) {
         QuestionResponseDto response = questionService.save(createDto);
         URI newResourceLocation = getNewResourceLocation(response.getId());
         return ResponseEntity.created(newResourceLocation).body(response);
@@ -43,7 +44,8 @@ public class QuestionController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<QuestionResponseDto> update(@PathVariable @ExistingQuestionId Long id, @RequestBody QuestionUpdateDto updateDto) {
+    public ResponseEntity<QuestionResponseDto> update(@PathVariable @ExistingQuestionId Long id,
+                                                      @RequestBody @Valid QuestionUpdateDto updateDto) {
         return ResponseEntity.ok(questionService.update(id, updateDto));
     }
 

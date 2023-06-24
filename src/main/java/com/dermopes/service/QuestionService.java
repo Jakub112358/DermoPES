@@ -49,6 +49,7 @@ public class QuestionService {
         question.setContent(updateDto.getContent());
         question.setExamDate(updateDto.getExamDate());
         question.setCategories(updateDto.getCategories());
+        question.setDifficulty(updateDto.getDifficulty());
     }
 
 }
