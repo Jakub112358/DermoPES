@@ -2,6 +2,7 @@ package com.dermopes.controller;
 
 import com.dermopes.dto.question.QuestionCreateDto;
 import com.dermopes.dto.question.QuestionResponseDto;
+import com.dermopes.dto.question.QuestionUpdateDto;
 import com.dermopes.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,17 @@ public class QuestionController {
     @GetMapping("/{id}")
     public ResponseEntity<QuestionResponseDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(questionService.findById(id));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<QuestionResponseDto> update(@PathVariable Long id, @RequestBody QuestionUpdateDto updateDto) {
+        return ResponseEntity.ok(questionService.update(id, updateDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        questionService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     private URI getNewResourceLocation(long id) {
