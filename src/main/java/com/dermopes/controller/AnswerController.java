@@ -5,6 +5,7 @@ import com.dermopes.dto.answer.AnswerResponseDto;
 import com.dermopes.service.AnswerService;
 import com.dermopes.validation.existingAnswerId.ExistingAnswerId;
 import com.dermopes.validation.existingQuestionId.ExistingQuestionId;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,7 +28,7 @@ public class AnswerController {
 
     @PostMapping("/{questionId}/answers")
     public ResponseEntity<AnswerResponseDto> save(@PathVariable @ExistingQuestionId Long questionId,
-                                                  @RequestBody AnswerCreateDto createDto) {
+                                                  @RequestBody @Valid AnswerCreateDto createDto) {
         AnswerResponseDto response = answerService.save(questionId, createDto);
         URI newResourceLocation = getNewResourceLocation(response.getId());
         return ResponseEntity.created(newResourceLocation).body(response);
@@ -47,7 +48,7 @@ public class AnswerController {
     @PutMapping("/{questionId}/answers/{answerId}")
     public ResponseEntity<AnswerResponseDto> update(@PathVariable @ExistingQuestionId Long questionId,
                                                     @PathVariable @ExistingAnswerId Long answerId,
-                                                    @RequestBody AnswerCreateDto createDto) {
+                                                    @RequestBody @Valid AnswerCreateDto createDto) {
         return ResponseEntity.ok(answerService.update(questionId, answerId, createDto));
     }
 

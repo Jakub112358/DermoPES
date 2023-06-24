@@ -1,5 +1,7 @@
 package com.dermopes.dto.answer;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -8,6 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class AnswerCreateDto {
+    @NotBlank
     private String content;
-    private boolean correct;
+    @NotNull
+    private Boolean correct;
 }

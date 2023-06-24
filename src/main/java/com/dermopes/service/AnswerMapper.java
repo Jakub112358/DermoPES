@@ -15,7 +15,7 @@ public class AnswerMapper {
     public Answer toEntity (AnswerCreateDto createDto){
         return Answer.builder()
                 .content(createDto.getContent())
-                .correct(createDto.isCorrect())
+                .correct(createDto.getCorrect())
                 .build();
     }
 
@@ -24,7 +24,7 @@ public class AnswerMapper {
 
         return Answer.builder()
                 .content(createDto.getContent())
-                .correct(createDto.isCorrect())
+                .correct(createDto.getCorrect())
                 .question(question)
                 .build();
     }
