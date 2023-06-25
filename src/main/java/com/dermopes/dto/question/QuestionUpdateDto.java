@@ -19,6 +19,8 @@ import java.util.List;
 public class QuestionUpdateDto {
     @NotBlank
     private String content;
+
+    //assuming that 2010-01-01 is the date of the first PES exam
     @NotNull
     @IsAfter(current = "2010-01-01")
     @PastOrPresent

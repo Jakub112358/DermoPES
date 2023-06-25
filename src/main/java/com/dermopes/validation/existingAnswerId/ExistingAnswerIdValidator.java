@@ -1,5 +1,6 @@
 package com.dermopes.validation.existingAnswerId;
 
+import com.dermopes.exception.ResourceNotFoundException;
 import com.dermopes.repository.AnswerRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -13,6 +14,8 @@ public class ExistingAnswerIdValidator implements ConstraintValidator<ExistingAn
     public boolean isValid(Long answerId, ConstraintValidatorContext context) {
         if (answerId == null)
             return false;
-        return answerRepository.existsById(answerId);
+        if(!answerRepository.existsById(answerId))
+            throw new ResourceNotFoundException("Answer", answerId);
+        return true;
     }
 }

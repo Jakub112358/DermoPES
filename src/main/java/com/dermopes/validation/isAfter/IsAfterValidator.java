@@ -14,6 +14,8 @@ public class IsAfterValidator implements ConstraintValidator<IsAfter, LocalDate>
 
     @Override
     public boolean isValid(LocalDate date, ConstraintValidatorContext context) {
+        if(date == null)
+            return false;
         String[] splitDate = validDate.split("-");
         return date.isAfter(LocalDate.of(Integer.parseInt(splitDate[0]), Integer.parseInt(splitDate[1]), Integer.parseInt(splitDate[2])));
     }

@@ -19,7 +19,7 @@ public class MetricController {
 
     private final MetricService metricService;
 
-    @GetMapping(value = "/status-metric")
+    @GetMapping(value = "/metric")
     @ResponseBody
     public ResponseEntity<Map<String, Map<Integer, Integer>>> getStatusMetric() {
         return ResponseEntity.ok(metricService.getFullMetric());

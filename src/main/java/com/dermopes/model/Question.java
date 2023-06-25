@@ -20,16 +20,14 @@ public class Question {
     private Long id;
     private String content;
     private LocalDate examDate;
-
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
     @ElementCollection(targetClass = Category.class, fetch = FetchType.EAGER)
     @CollectionTable
     @Enumerated(EnumType.STRING)
     private List<Category> categories;
-    @OneToMany (mappedBy = "question", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Answer> answers;
-
-    @Enumerated(EnumType.STRING)
-    private Difficulty difficulty;
 
     @Override
     public boolean equals(Object o) {
