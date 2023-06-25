@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DATABASE_TO_UPPER=false
+    driver-class-name: org.h2.Driver
+    username: username
+    password: password
+  jpa:
+    open-in-view: false
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
