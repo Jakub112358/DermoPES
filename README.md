@@ -11,7 +11,7 @@ Application is ready to use.
 
 ### General app description:
 The main purpose of the application is to make it easier to study for the PES (polish specialization exam for doctors) in dermatology.
-The solution will be to create a personalized web application that allows user to make CRUD operations in data base with previous exams questions.
+The solution will be to create a personalized web application that allows user to make CRUD operations in the data base with previous exams questions.
 Next step is to make quiz mode for users.
 
 ### General technical description: 
