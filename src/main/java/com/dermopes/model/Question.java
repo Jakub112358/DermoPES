@@ -18,6 +18,7 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 1023)
     private String content;
     private LocalDate examDate;
     @Enumerated(EnumType.STRING)
