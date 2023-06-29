@@ -15,18 +15,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-import static com.dermopes.config.ApiConstraints.ORIGIN;
-import static com.dermopes.config.ApiConstraints.QUESTION;
+import static com.dermopes.config.ApiConstraints.*;
 
 @RestController
-@RequestMapping(QUESTION)
+@RequestMapping(BASE_URL)
 @CrossOrigin(origins = ORIGIN)
 @RequiredArgsConstructor
 @Validated
 public class AnswerController {
     private final AnswerService answerService;
 
-    @PostMapping("/{questionId}/answers")
+    @PostMapping("questions/{questionId}/answers")
     public ResponseEntity<AnswerResponseDto> save(@PathVariable @ExistingQuestionId Long questionId,
                                                   @RequestBody @Valid AnswerCreateDto createDto) {
         AnswerResponseDto response = answerService.save(questionId, createDto);
@@ -34,21 +33,20 @@ public class AnswerController {
         return ResponseEntity.created(newResourceLocation).body(response);
     }
 
-    @GetMapping("/{questionId}/answers")
-    public ResponseEntity<List<AnswerResponseDto>> findAll(@PathVariable @ExistingQuestionId Long questionId) {
-        return ResponseEntity.ok(answerService.findAll(questionId));
+    @GetMapping("questions/{questionId}/answers")
+    public ResponseEntity<List<AnswerResponseDto>> findByQuestionId(@PathVariable @ExistingQuestionId Long questionId) {
+        return ResponseEntity.ok(answerService.findByQuestionId(questionId));
     }
 
-    @GetMapping("/{questionId}/answers/{answerId}")
-    public ResponseEntity<AnswerResponseDto> findById(@PathVariable @ExistingQuestionId Long questionId,
-                                                      @PathVariable @ExistingAnswerId Long answerId) {
-        return ResponseEntity.ok(answerService.findById(questionId, answerId));
+    @GetMapping("/answers/{answerId}")
+    public ResponseEntity<AnswerResponseDto> findById(@PathVariable @ExistingAnswerId Long answerId) {
+        return ResponseEntity.ok(answerService.findById(answerId));
     }
 
-    @PutMapping("/{questionId}/answers/{answerId}")
-    public ResponseEntity<AnswerResponseDto> update(@PathVariable @ExistingQuestionId Long questionId,
-                                                    @PathVariable @ExistingAnswerId Long answerId,
-                                                    @RequestBody @Valid AnswerCreateDto createDto) {
+    @PutMapping("questions/{questionId}/answers/{answerId}")
+    public ResponseEntity<AnswerResponseDto> replace(@PathVariable @ExistingQuestionId Long questionId,
+                                                     @PathVariable @ExistingAnswerId Long answerId,
+                                                     @RequestBody @Valid AnswerCreateDto createDto) {
         return ResponseEntity.ok(answerService.update(questionId, answerId, createDto));
     }
 

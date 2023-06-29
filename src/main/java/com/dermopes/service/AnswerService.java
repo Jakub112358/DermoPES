@@ -26,15 +26,13 @@ public class AnswerService {
         return answerMapper.toResponseDto(answer);
     }
 
-    public List<AnswerResponseDto> findAll(Long questionId) {
+    public List<AnswerResponseDto> findByQuestionId(Long questionId) {
         return answerRepository.findAllByQuestionId(questionId).stream()
                 .map(answerMapper::toResponseDto)
                 .toList();
     }
 
-    public AnswerResponseDto findById(Long questionId, Long answerId) {
-        throwIfAnswerDoesntReferToQuestion(questionId, answerId);
-
+    public AnswerResponseDto findById(Long answerId) {
         return answerMapper.toResponseDto(answerRepository.findById(answerId).orElseThrow(() -> new ResourceNotFoundException("Answer", answerId)));
     }
 
