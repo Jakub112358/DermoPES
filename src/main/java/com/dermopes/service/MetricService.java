@@ -18,20 +18,20 @@ public class MetricService {
         this.metricMapper = metricMapper;
     }
 
-    public void increaseCount(String request, int status) {
-        Map<Integer, Integer> statusMap = metricMap.get(request);
-        if (statusMap == null) {
-            statusMap = new ConcurrentHashMap<>();
+    public void increaseCount(String request, int statusCode) {
+        Map<Integer, Integer> statusCodeMap = metricMap.get(request);
+        if (statusCodeMap == null) {
+            statusCodeMap = new ConcurrentHashMap<>();
         }
 
-        Integer count = statusMap.get(status);
+        Integer count = statusCodeMap.get(statusCode);
         if (count == null) {
             count = 1;
         } else {
             count++;
         }
-        statusMap.put(status, count);
-        metricMap.put(request, statusMap);
+        statusCodeMap.put(statusCode, count);
+        metricMap.put(request, statusCodeMap);
     }
 
     public Set<MetricResponseDto> getFullMetric() {

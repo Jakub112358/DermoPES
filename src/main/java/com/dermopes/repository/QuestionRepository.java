@@ -15,12 +15,12 @@ public interface QuestionRepository extends JpaRepository<Question, Long>, JpaSp
     SELECT q FROM Question q
     LEFT JOIN FETCH q.answers
     """)
-    List<Question> findAllWithAnswers();
+    List<Question> findAllAndFetchAnswers();
 
     @Query("""
     SELECT q FROM Question q
     LEFT JOIN FETCH q.answers
     WHERE q.id = :id
     """)
-    Optional<Question> findByIdWithAnswers(@Param("id") Long id);
+    Optional<Question> findByIdAndFetchAnswers(@Param("id") Long id);
 }

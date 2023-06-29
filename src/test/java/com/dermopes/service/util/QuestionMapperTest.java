@@ -50,14 +50,14 @@ public class QuestionMapperTest {
         verify(answerMapper).toEntity(answerDto2);
 
         //and
-        assertEquals(QuestionFactory.simpleContent, result.getContent());
-        assertEquals(QuestionFactory.simpleExamDate, result.getExamDate());
-        assertEquals(QuestionFactory.simpleDifficulty, result.getDifficulty());
-        assertEquals(QuestionFactory.simpleCategories, result.getCategories());
+        assertResultEqualsSimpleQuestion(result);
+
         assertEquals(2, result.getAnswers().size());
         assertEquals(answer1, result.getAnswers().get(0));
         assertEquals(answer2, result.getAnswers().get(1));
     }
+
+
 
     @Test
     public void whenToEntity_WithoutAnswers_thenShouldReturnCorrect() {
@@ -69,10 +69,8 @@ public class QuestionMapperTest {
         Question result = questionMapper.toEntity(request);
 
         //then
-        assertEquals(QuestionFactory.simpleContent, result.getContent());
-        assertEquals(QuestionFactory.simpleExamDate, result.getExamDate());
-        assertEquals(QuestionFactory.simpleDifficulty, result.getDifficulty());
-        assertEquals(QuestionFactory.simpleCategories, result.getCategories());
+        assertResultEqualsSimpleQuestion(result);
+
         assertEquals(new ArrayList<>(), result.getAnswers());
     }
 
@@ -103,12 +101,25 @@ public class QuestionMapperTest {
 
         //and
         assertEquals(1L, result.getId());
+
+        assertResultEqualsSimpleQuestion(result);
+
+        assertEquals(List.of(answerDto1, answerDto2), result.getAnswers());
+
+    }
+
+    private void assertResultEqualsSimpleQuestion(Question result) {
         assertEquals(QuestionFactory.simpleContent, result.getContent());
         assertEquals(QuestionFactory.simpleExamDate, result.getExamDate());
         assertEquals(QuestionFactory.simpleDifficulty, result.getDifficulty());
         assertEquals(QuestionFactory.simpleCategories, result.getCategories());
-        assertEquals(List.of(answerDto1, answerDto2), result.getAnswers());
+    }
 
+    private void assertResultEqualsSimpleQuestion(QuestionResponseDto result) {
+        assertEquals(QuestionFactory.simpleContent, result.getContent());
+        assertEquals(QuestionFactory.simpleExamDate, result.getExamDate());
+        assertEquals(QuestionFactory.simpleDifficulty, result.getDifficulty());
+        assertEquals(QuestionFactory.simpleCategories, result.getCategories());
     }
 
 }
