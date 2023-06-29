@@ -4,14 +4,15 @@ INSERT INTO question (id, content, difficulty, exam_date) VALUES (1, 'Bezwzględ
                                                              (4, 'Do Kliniki Dermatologii przyjęto 23-letnią pacjentkę ze zmianami o typie przebarwień koloru mahoniu w obrębie grzbietowych powierzchni rąk i stóp oraz zapalenia języka obecnych od kilku miesięcy. W wywiadzie również utrata apetytu, bóle brzucha, przewlekła biegunka oraz podejrzenie zespołu otępiennego. Pacjentka od kilku lat stosuje karbamazepinę z powodu padaczki. U pacjentki w diagnostyce różnicowej zmian skórnych należy rozważyć niedobór witaminy:', 'EXTREME', '2022-10-01'),
                                                              (5, 'Przez jaki okres od zakażenia testy wykrywające przeciwciała antyretrowirusowe nie mają wartości diagnostycznej?' , 'MEDIUM', '2022-10-01');
 
-INSERT INTO question_categories(question_id, categories) VALUES (1, 'GENERAL'),
-                                                                (1, 'BIOLOGICAL_TREATMENT'),
-                                                                (2, 'GENERAL'),
-                                                                (2, 'DERMOSCOPY'),
-                                                                (3, 'NAIL_DISEASES'),
-                                                                (4, 'NAIL_DISEASES'),
-                                                                (4, 'TRICHOSCOPY'),
-                                                                (5, 'GENERAL');
+INSERT INTO question_categories(question_id, categories) VALUES (1, 'PHOTOTHERAPY'),
+                                                                (2, 'PHOTOTHERAPY'),
+                                                                (2, 'VENEREOLOGY'),
+                                                                (2, 'HIV'),
+                                                                (3, 'VENEREOLOGY'),
+                                                                (3, 'HIV'),
+                                                                (4, 'VITAMINS'),
+                                                                (5, 'VENEREOLOGY'),
+                                                                (5, 'HIV');
 
 INSERT INTO answer (content, correct, question_id) VALUES ('padaczka', true, 1),
                                                           ('istniejące lub przebyte nowotwory skóry', true, 1),
