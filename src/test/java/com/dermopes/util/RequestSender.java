@@ -10,7 +10,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @Component
 @RequiredArgsConstructor
-public class RequestTool {
+public class RequestSender {
 
     private final MockMvc mockMvc;
 

@@ -13,6 +13,8 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.dermopes.config.Constants.FIRST_EXAM_DATE;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,7 +24,7 @@ public class QuestionCreateDto {
     @NotBlank
     private String content;
     @NotNull
-    @IsAfter(current = "2010-01-01")
+    @IsAfter(current = FIRST_EXAM_DATE)
     @PastOrPresent
     private LocalDate examDate;
     @NotNull

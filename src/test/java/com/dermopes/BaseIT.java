@@ -2,7 +2,7 @@ package com.dermopes;
 
 import com.dermopes.repository.QuestionRepository;
 import com.dermopes.util.DBOperations;
-import com.dermopes.util.RequestTool;
+import com.dermopes.util.RequestSender;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class BaseIT {
     @Autowired
     protected DBOperations dbOperations;
     @Autowired
-    protected RequestTool requestTool;
+    protected RequestSender requestSender;
     @Autowired
     protected QuestionRepository questionRepository;
 

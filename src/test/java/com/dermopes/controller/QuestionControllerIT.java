@@ -37,7 +37,7 @@ public class QuestionControllerIT extends BaseIT {
         var request = QuestionFactory.getSimpleQuestionCreateDtoBuilder().build();
 
         //when
-        var result = requestTool.sendPostRequest(QUESTION, toJsonString(request));
+        var result = requestSender.sendPostRequest(QUESTION, toJsonString(request));
 
         //then
         result.andExpect(status().isCreated())
@@ -51,7 +51,7 @@ public class QuestionControllerIT extends BaseIT {
     @MethodSource("questionCreateIncorrectParameters")
     public void whenSave_thenValidationFailed(QuestionCreateDto createDto) throws Exception {
         //when
-        var result = requestTool.sendPostRequest(QUESTION, toJsonString(createDto));
+        var result = requestSender.sendPostRequest(QUESTION, toJsonString(createDto));
 
         //then
         result.andExpect(status().isBadRequest());
@@ -66,7 +66,7 @@ public class QuestionControllerIT extends BaseIT {
         var path = QUESTION + "/" + question.getId();
 
         //when
-        var result = requestTool.sendGetRequest(path);
+        var result = requestSender.sendGetRequest(path);
 
         //then
         result.andExpect(status().isOk())
@@ -85,7 +85,7 @@ public class QuestionControllerIT extends BaseIT {
         var path = QUESTION + "/" + Long.MAX_VALUE;
 
         //when
-        var result = requestTool.sendGetRequest(path);
+        var result = requestSender.sendGetRequest(path);
 
         //then
         result.andExpect(status().isNotFound());
@@ -98,7 +98,7 @@ public class QuestionControllerIT extends BaseIT {
         dbOperations.addSimpleQuestionToDb();
 
         //when
-        var result = requestTool.sendGetRequest(QUESTION);
+        var result = requestSender.sendGetRequest(QUESTION);
 
         //then
         result.andExpect(status().isOk());
@@ -121,7 +121,7 @@ public class QuestionControllerIT extends BaseIT {
         var updateDto = QuestionFactory.getQuestionUpdateDtoBuilder().build();
 
         //when
-        var result = requestTool.sendPatchRequest(path, toJsonString(updateDto));
+        var result = requestSender.sendPatchRequest(path, toJsonString(updateDto));
 
         //then
         result.andExpect(status().isOk());
@@ -138,7 +138,7 @@ public class QuestionControllerIT extends BaseIT {
         var path = QUESTION + "/" + question.getId();
 
         //when
-        var result = requestTool.sendPatchRequest(path, toJsonString(updateDto));
+        var result = requestSender.sendPatchRequest(path, toJsonString(updateDto));
 
         //then
         result.andExpect(status().isBadRequest());
@@ -154,7 +154,7 @@ public class QuestionControllerIT extends BaseIT {
         var path1 = QUESTION + "/" + question1.getId();
 
         //when
-        var result = requestTool.sendDeleteRequest(path1);
+        var result = requestSender.sendDeleteRequest(path1);
 
         //then
         result.andExpect(status().isNoContent());
@@ -173,7 +173,7 @@ public class QuestionControllerIT extends BaseIT {
         var path = QUESTION + "/" + Long.MAX_VALUE;
 
         //when
-        var result = requestTool.sendDeleteRequest(path);
+        var result = requestSender.sendDeleteRequest(path);
 
         //then
         result.andExpect(status().isNotFound());
